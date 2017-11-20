@@ -36,10 +36,10 @@ import type { $Request, $Response } from 'express';
  */
 export type Options =
   | ((
-    request: $Request,
-    response: $Response,
-    params?: GraphQLParams,
-  ) => OptionsResult)
+      request: $Request,
+      response: $Response,
+      params?: GraphQLParams,
+    ) => OptionsResult)
   | OptionsResult;
 export type OptionsResult = OptionsData | Promise<OptionsData>;
 export type OptionsData = {
@@ -101,7 +101,7 @@ export type RequestInfo = {
   /**
    * The parsed GraphQL document.
    */
-  document: DocumentNode,
+  document: ?DocumentNode,
 
   /**
    * The variable values used at runtime.

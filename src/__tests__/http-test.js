@@ -267,7 +267,8 @@ describe('test harness', () => {
         expect(JSON.parse(response.text)).to.deep.equal({
           errors: [
             {
-              message: 'Must provide operation name if query contains multiple operations.',
+              message:
+                'Must provide operation name if query contains multiple operations.',
             },
           ],
         });
@@ -288,7 +289,8 @@ describe('test harness', () => {
         expect(JSON.parse(response.text)).to.deep.equal({
           errors: [
             {
-              message: 'Can only perform a mutation operation from a POST request.',
+              message:
+                'Can only perform a mutation operation from a POST request.',
             },
           ],
         });
@@ -313,7 +315,8 @@ describe('test harness', () => {
         expect(JSON.parse(response.text)).to.deep.equal({
           errors: [
             {
-              message: 'Can only perform a mutation operation from a POST request.',
+              message:
+                'Can only perform a mutation operation from a POST request.',
             },
           ],
         });
@@ -550,10 +553,12 @@ describe('test harness', () => {
           }),
         );
 
-        const response = await request(app).post(urlString()).send({
-          query: 'query helloWho($who: String){ test(who: $who) }',
-          variables: JSON.stringify({ who: 'Dolly' }),
-        });
+        const response = await request(app)
+          .post(urlString())
+          .send({
+            query: 'query helloWho($who: String){ test(who: $who) }',
+            variables: JSON.stringify({ who: 'Dolly' }),
+          });
 
         expect(response.text).to.equal('{"data":{"test":"Hello Dolly"}}');
       });
@@ -569,10 +574,12 @@ describe('test harness', () => {
           }),
         );
 
-        const response = await request(app).post(urlString()).send({
-          query: 'query helloWho($who: String){ test(who: $who) }',
-          variables: { who: 'Dolly' },
-        });
+        const response = await request(app)
+          .post(urlString())
+          .send({
+            query: 'query helloWho($who: String){ test(who: $who) }',
+            variables: { who: 'Dolly' },
+          });
 
         expect(response.text).to.equal('{"data":{"test":"Hello Dolly"}}');
       });
@@ -588,12 +595,14 @@ describe('test harness', () => {
           }),
         );
 
-        const response = await request(app).post(urlString()).send(
-          stringify({
-            query: 'query helloWho($who: String){ test(who: $who) }',
-            variables: JSON.stringify({ who: 'Dolly' }),
-          }),
-        );
+        const response = await request(app)
+          .post(urlString())
+          .send(
+            stringify({
+              query: 'query helloWho($who: String){ test(who: $who) }',
+              variables: JSON.stringify({ who: 'Dolly' }),
+            }),
+          );
 
         expect(response.text).to.equal('{"data":{"test":"Hello Dolly"}}');
       });
@@ -680,8 +689,10 @@ describe('test harness', () => {
           })),
         );
 
-        const response = await request(app).post(urlString()).send({
-          query: `
+        const response = await request(app)
+          .post(urlString())
+          .send({
+            query: `
               query helloYou { test(who: "You"), ...shared }
               query helloWorld { test(who: "World"), ...shared }
               query helloDolly { test(who: "Dolly"), ...shared }
@@ -689,8 +700,8 @@ describe('test harness', () => {
                 shared: test(who: "Everyone")
               }
             `,
-          operationName: 'helloWorld',
-        });
+            operationName: 'helloWorld',
+          });
 
         expect(JSON.parse(response.text)).to.deep.equal({
           data: {
@@ -1024,8 +1035,8 @@ describe('test harness', () => {
           graphqlHTTP(req => {
             return {
               schema: TestSchema,
-              pretty: ((url.parse(req.url, true) || {}).query || {}).pretty ===
-                '1',
+              pretty:
+                ((url.parse(req.url, true) || {}).query || {}).pretty === '1',
             };
           }),
         );
@@ -1244,7 +1255,8 @@ describe('test harness', () => {
         expect(JSON.parse(response.text)).to.deep.equal({
           errors: [
             {
-              message: 'Syntax Error GraphQL request (1:1) ' +
+              message:
+                'Syntax Error GraphQL request (1:1) ' +
                 'Unexpected Name "syntaxerror"\n\n1: syntaxerror\n   ^\n',
               locations: [{ line: 1, column: 1 }],
             },
